@@ -36,10 +36,27 @@ class Game extends React.Component {
     })
   }
 
+  // toggleMoves = () => {
+  //   if (calculateWinner(squares)) {
+      
+  //   }
+  // }
+
     render() {
       const history = this.state.history;
       const current = history[this.state.stepNumber];
-      const winner = calculateWinner(current.squares);
+      let winner;
+      let line;
+      if(calculateWinner(current.squares))
+      {
+        line = calculateWinner(current.squares).slice();
+        winner = current.squares[line.slice(0,1)];
+      }
+      else 
+      {
+        winner = null;
+        line = null;
+      }
 
       const moves = history.map((step, move) => {
         const desc = move ? 'Go to move #' + move : 'Go to game start';
@@ -54,17 +71,22 @@ class Game extends React.Component {
       if(winner)
         tStatus = 'Winner: ' + winner;
       else
+      if(this.state.stepNumber === 9)
+        tStatus = 'It is a Draw Match!!';
+      else
+      if(this.state.stepNumber !== 9)
         tStatus = 'Next player:' + (this.state.xIsNext ? 'X' : 'O');
 
 
       return (
         <div className="game">
           <div className="game-board">
-            <Board squares = {current.squares} onClick = {(i) => this.handleClick(i)}/>
+            <Board squares = {current.squares} onClick = {(i) => this.handleClick(i)} line = {this.line}/>
           </div>
           <div className="game-info">
             <div>{tStatus}</div>
             <ol>{moves}</ol>
+            <button onClick = {() => this.toggleMoves}>To reverse the order of moves</button>
           </div>
         </div>
       );

@@ -6,7 +6,7 @@ class Board extends Component {
 
     renderSquare = (i) => {
         return <Square value = {this.props.squares[i]} 
-                    onClick = {() => this.props.onClick(i)}/>
+                    onClick = {() => this.props.onClick(i)} line = {this.props.line && this.props.line.includes(i)}/>
     }
 
     render() {

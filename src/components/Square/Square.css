@@ -12,6 +12,10 @@
     text-align: center;
     width: 34px;
   }
+
+  .square.bold {
+    background: #ddd
+  }
   
   .square:focus {
     outline: none;
