@@ -3,7 +3,7 @@ import './Square.css';
 
 function Square(props) {
         return(
-            <button className={"square " + (props.line ? "bold" : "")} onClick={props.onClick}>
+            <button className={"square " +(props.line ? "bold" : "")} onClick={props.onClick}>
                 {props.value}
             </button>
         );

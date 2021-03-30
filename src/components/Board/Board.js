@@ -10,25 +10,23 @@ class Board extends Component {
     }
 
     render() {
-        return (
-          <div>
-            <div className="board-row">
-              {this.renderSquare(0)}
-              {this.renderSquare(1)}
-              {this.renderSquare(2)}
-            </div>
-            <div className="board-row">
-              {this.renderSquare(3)}
-              {this.renderSquare(4)}
-              {this.renderSquare(5)}
-            </div>
-            <div className="board-row">
-              {this.renderSquare(6)}
-              {this.renderSquare(7)}
-              {this.renderSquare(8)}
-            </div>
-          </div>
-        );
+      let k = 0, boardSize = 3;
+      let row =[];
+      let squares = [];
+      while( k < boardSize ) {
+        row = []
+        for( let i = 0; i < boardSize; i++ ) {
+          row.push(this.renderSquare(k * boardSize + i));
+        }
+        squares.push(<div key = {k} className='board-row'>{row}</div>);
+        k++;
+      }
+
+      return (
+        <div>
+          {squares}
+        </div>
+      );
       }
 }
 

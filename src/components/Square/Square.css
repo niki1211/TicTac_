@@ -14,7 +14,7 @@
   }
 
   .square.bold {
-    background: #ddd
+    border: 2px solid;
   }
   
   .square:focus {

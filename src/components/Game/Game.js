@@ -11,6 +11,7 @@ class Game extends React.Component {
       history : [{squares : Array(9).fill(null)},],
       stepNumber : 0,
       xIsNext : true,
+      isAsc : true,
     }
   }
 
@@ -36,11 +37,12 @@ class Game extends React.Component {
     })
   }
 
-  // toggleMoves = () => {
-  //   if (calculateWinner(squares)) {
-      
-  //   }
-  // }
+  toggleMoves = () => {
+    this.setState({
+      isAsc : !this.state.isAsc,
+    })
+  }
+
 
     render() {
       const history = this.state.history;
@@ -62,7 +64,7 @@ class Game extends React.Component {
         const desc = move ? 'Go to move #' + move : 'Go to game start';
         return (
           <li key={move}>
-            <button onClick = {() => this.jumpTo(move)}>{desc}</button>
+            <button className = {move === this.state.stepNumber ? 'highlight' : ''}onClick = {() => this.jumpTo(move)}>{desc}</button>
           </li>
         );
       })
@@ -77,16 +79,20 @@ class Game extends React.Component {
       if(this.state.stepNumber !== 9)
         tStatus = 'Next player:' + (this.state.xIsNext ? 'X' : 'O');
 
+      let asc = this.state.isAsc;
+      if(asc)
+        moves.reverse();
+
 
       return (
         <div className="game">
           <div className="game-board">
-            <Board squares = {current.squares} onClick = {(i) => this.handleClick(i)} line = {this.line}/>
+            <Board squares = {current.squares} onClick = {(i) => this.handleClick(i)} line = {line}/>
           </div>
           <div className="game-info">
             <div>{tStatus}</div>
+            <button onClick = {() => this.toggleMoves()}>{asc ? 'Decending' : 'Ascending'}</button>
             <ol>{moves}</ol>
-            <button onClick = {() => this.toggleMoves}>To reverse the order of moves</button>
           </div>
         </div>
       );

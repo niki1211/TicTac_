@@ -13,7 +13,13 @@
     display: table;
   }
 
+  .highlight {
+    font-weight: bold;
+  }
+
   ol, ul {
     padding-left: 30px;
   }
+
+
   
